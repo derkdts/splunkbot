@@ -1,0 +1,14 @@
+[Unit]
+Description=Telegram Splunk Bot Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/splunkbot
+ExecStart=/usr/bin/python3 /opt/splunkbot/main.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
