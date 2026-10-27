@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  bot:
+    image: python:3.10-slim
+    container_name: splunk_tg_bot
+    restart: always
+    # Подтягиваем переменные из .env
+    env_file:
+      - .env
+    # Монтируем текущую папку внутрь контейнера
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      - PYTHONUNBUFFERED=1
+    # При старте сначала ставим библиотеки, затем запускаем скрипт
+    command: >
+      sh -c "pip install --no-cache-dir aiogram python-dotenv splunk-sdk && 
+             python main.py"
